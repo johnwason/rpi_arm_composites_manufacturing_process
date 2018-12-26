@@ -8,7 +8,7 @@ import time
 def main():
     rospy.init_node("pick_and_place_panel", anonymous=True)
     
-    p=ProcessController(disable_ft=True)
+    p=ProcessController(disable_ft=False)
     
     # Wait for payload messages to arrive
     time.sleep(0.5)
