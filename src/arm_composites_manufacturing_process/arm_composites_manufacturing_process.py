@@ -179,9 +179,12 @@ class ProcessController(object):
         
         self.controller_commander.set_controller_mode(self.desired_controller_mode, 0.4*self.speed_scalar, [], \
                                                       self.get_payload_pickup_ft_threshold(self.current_target))
-          
-        self.controller_commander.compute_cartesian_path_and_move(pose_target2, avoid_collisions=False)
         
+        try:
+            self.controller_commander.compute_cartesian_path_and_move(pose_target2, avoid_collisions=False)
+        except:
+            traceback.print_exc()
+                
         self.rapid_node.set_digital_io("Vacuum_enable", 1)
         time.sleep(1)        
         
@@ -201,8 +204,9 @@ class ProcessController(object):
         pose_target2=copy.deepcopy(object_target)
         pose_target2.p[2] += 0.15   
         
+        self.controller_commander.set_controller_mode(self.controller_commander.MODE_HALT, 0.4*self.speed_scalar, [], [])
         self.controller_commander.set_controller_mode(self.desired_controller_mode, 0.4*self.speed_scalar, [], [])
-          
+        
         self.controller_commander.compute_cartesian_path_and_move(pose_target2, avoid_collisions=False)
         
         self.state="pickup_grab"
@@ -288,9 +292,12 @@ class ProcessController(object):
         pose_target2.p[2] -= 0.15 
         
         self.controller_commander.set_controller_mode(self.desired_controller_mode, 0.4*self.speed_scalar, [], \
-                                                      self.get_payload_pickup_ft_threshold(self.current_target))
-          
-        self.controller_commander.compute_cartesian_path_and_move(pose_target2, avoid_collisions=False)
+                                                      self.get_payload_pickup_ft_threshold(self.current_payload))
+        
+        try:
+            self.controller_commander.compute_cartesian_path_and_move(pose_target2, avoid_collisions=False)
+        except:
+            traceback.print_exc()
         
         self.rapid_node.set_digital_io("Vacuum_enable", 0)
         time.sleep(1)        
@@ -312,6 +319,7 @@ class ProcessController(object):
         pose_target2=copy.deepcopy(pose_target)
         pose_target2.p[2] += 0.15   
         
+        self.controller_commander.set_controller_mode(self.controller_commander.MODE_HALT, 0.4*self.speed_scalar, [], [])
         self.controller_commander.set_controller_mode(self.desired_controller_mode, 0.4*self.speed_scalar, [], [])
           
         self.controller_commander.compute_cartesian_path_and_move(pose_target2, avoid_collisions=False)
