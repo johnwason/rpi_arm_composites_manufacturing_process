@@ -128,7 +128,7 @@ class ProcessController(object):
         
         object_target, object_pose=self._vision_get_object_gripper_target_pose(target_payload)
         
-        self._update_payload_pose(target_payload, object_pose, confidence=0.8)
+        self._update_payload_pose(target_payload, object_pose, confidence=0.8, parent_frame_id=object_pose.parent_frame_id)
         
         rospy.logdebug("Found payload %s at pose %s", target_payload, object_target)
         
