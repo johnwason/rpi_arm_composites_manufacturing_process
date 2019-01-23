@@ -40,7 +40,6 @@ import rpi_abb_irc5.ros.rapid_commander as rapid_node_pkg
 import safe_kinematic_controller.ros.commander as controller_commander_pkg
 from rpi_arm_composites_manufacturing_process.msg import ProcessState
 from object_recognition_msgs.msg import ObjectRecognitionAction, ObjectRecognitionGoal
-from rpi_arm_composites_manufacturing_process.msg import PayloadArray
 from industrial_payload_manager.payload_transform_listener import PayloadTransformListener
 from industrial_payload_manager.srv import UpdatePayloadPose, UpdatePayloadPoseRequest, \
     GetPayloadArray, GetPayloadArrayRequest
@@ -48,7 +47,6 @@ import time
 import sys
 from moveit_msgs.msg import ExecuteTrajectoryAction, ExecuteTrajectoryGoal, MoveItErrorCodes
 import os
-from rpi_arm_composites_manufacturing_process.msg import Payload, PayloadTarget, PayloadArray, ArucoGridboard, ProcessState
 import threading
 from moveit_commander import PlanningSceneInterface
 import traceback
